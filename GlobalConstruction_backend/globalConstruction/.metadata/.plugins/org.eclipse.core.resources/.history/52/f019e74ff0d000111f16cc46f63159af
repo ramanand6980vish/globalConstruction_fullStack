@@ -1,0 +1,66 @@
+-- ============================================================
+-- V9: ADVANCE & AMORTIZATION
+-- ============================================================
+
+-- ============================================================
+-- ADVANCE
+-- ============================================================
+
+CREATE TABLE advance (
+    advance_id VARCHAR(36) NOT NULL,
+    employee_id VARCHAR(36) NOT NULL,
+    site_id VARCHAR(36) NOT NULL,
+    request_date DATE NOT NULL,
+    amount_requested NUMERIC(10,2) NOT NULL,
+    amount_approved NUMERIC(10,2),
+    purpose TEXT,
+    status VARCHAR(20) NOT NULL,
+    approved_by VARCHAR(36),
+    approved_at TIMESTAMP,
+    payment_date DATE,
+    payment_reference VARCHAR(100),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT pk_advance
+        PRIMARY KEY (advance_id),
+
+    CONSTRAINT fk_advance_employee
+        FOREIGN KEY (employee_id)
+        REFERENCES employee(employee_id),
+
+    CONSTRAINT fk_advance_site
+        FOREIGN KEY (site_id)
+        REFERENCES site(site_id),
+
+    CONSTRAINT fk_advance_approved_by
+        FOREIGN KEY (approved_by)
+        REFERENCES `user`(user_id)
+);
+
+
+-- ============================================================
+-- ADVANCE RECOVERY
+-- ============================================================
+
+CREATE TABLE advance_recovery (
+    recovery_id VARCHAR(36) NOT NULL,
+    advance_id VARCHAR(36) NOT NULL,
+    payroll_detail_id VARCHAR(36),
+    recovery_date DATE NOT NULL,
+    amount NUMERIC(10,2) NOT NULL,
+    remarks TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT pk_advance_recovery
+        PRIMARY KEY (recovery_id),
+
+    CONSTRAINT fk_recovery_advance
+        FOREIGN KEY (advance_id)
+        REFERENCES advance(advance_id),
+
+    CONSTRAINT fk_recovery_payroll_detail
+        FOREIGN KEY (payroll_detail_id)
+        REFERENCES payroll_detail(payroll_detail_id)
+);

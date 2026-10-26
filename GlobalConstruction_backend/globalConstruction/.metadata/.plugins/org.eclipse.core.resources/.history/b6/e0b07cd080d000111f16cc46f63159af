@@ -1,0 +1,5 @@
+package com.globalconstruction.portal.company.entity;
+
+public class Company {
+
+}

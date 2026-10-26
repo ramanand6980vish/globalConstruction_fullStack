@@ -1,0 +1,30 @@
+
+package com.globalconstruction.portal.designation.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.globalconstruction.portal.designation.entity.Designation;
+import com.globalconstruction.portal.designation.repository.DesignationRepository;
+
+@RestController
+@RequestMapping("/api/designations")
+@CrossOrigin(origins = "http://localhost:5173")
+public class DesignationController {
+
+    private final DesignationRepository designationRepository;
+
+    public DesignationController(DesignationRepository designationRepository) {
+        this.designationRepository = designationRepository;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Designation>> getAllDesignations() {
+        return ResponseEntity.ok(designationRepository.findAll());
+    }
+}

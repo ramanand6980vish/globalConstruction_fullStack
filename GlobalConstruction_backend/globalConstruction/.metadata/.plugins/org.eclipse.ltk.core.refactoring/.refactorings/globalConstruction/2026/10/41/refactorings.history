@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;globalConstruction&apos;&#x0D;&#x0A;- Original project: &apos;globalConstruction&apos;&#x0D;&#x0A;- Original element: &apos;globalConstruction/src/main/java/com.globalconstruction.portal.designation.dto.entity&apos;" description="Delete element" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.globalconstruction.portal.designation.dto.entity" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.globalconstruction.portal.designation.dto" element3="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.globalconstruction.portal.designation" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1791356654028" subPackages="false" version="1.0"/>
+</session>

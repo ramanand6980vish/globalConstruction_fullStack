@@ -1,0 +1,764 @@
+
+/* =========================================
+   GLOBAL CONSTRUCTION - ADMIN DASHBOARD
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.gc-dashboard {
+  min-height: 100vh;
+  background: #f3f6fb;
+  color: #172033;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.gc-topbar {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.gc-topbar h1 {
+  margin: 0;
+  color: #17365d;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.gc-dashboard-main {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.gc-page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.gc-page-heading h2 {
+  margin: 0 0 7px;
+  color: #172b4d;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.gc-page-heading p,
+.gc-panel-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   HEADER ACTIONS
+========================================= */
+
+.gc-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Shared button styles */
+
+.gc-primary-button,
+.gc-refresh-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 15px;
+  border: 1px solid #d5deea;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.gc-primary-button {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
+.gc-primary-button:hover {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+
+.gc-refresh-button {
+  color: #334155;
+}
+
+.gc-refresh-button:hover {
+  background: #edf2f7;
+}
+
+.gc-refresh-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   CREATE / ADD DROPDOWN
+   Uses your existing JSX class names
+========================================= */
+
+.create-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  isolation: isolate;
+}
+
+/* Add / Create New button */
+
+.create-dropdown-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 42px;
+  padding: 0 17px;
+
+  color: #ffffff;
+  background: #1d4ed8;
+  border: 1px solid #1d4ed8;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(29, 78, 216, 0.15);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.create-dropdown-button:hover {
+  color: #ffffff;
+  background: #1e40af;
+  border-color: #1e40af;
+  box-shadow: 0 4px 10px rgba(29, 78, 216, 0.2);
+}
+
+.create-dropdown-button:active {
+  background: #1e3a8a;
+}
+
+.create-dropdown-button:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.3);
+  outline-offset: 3px;
+}
+
+/* Optional arrow if your button contains one */
+
+.create-dropdown-button .dropdown-arrow {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.create-dropdown-button[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown popup menu */
+
+.create-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 9999;
+
+  display: block;
+  width: 250px;
+  min-width: 220px;
+  max-width: calc(100vw - 32px);
+  padding: 6px;
+
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.13),
+    0 3px 8px rgba(15, 23, 42, 0.05);
+
+  text-align: left;
+  animation: gc-dropdown-enter 0.16s ease-out;
+}
+
+/* Each option inside the dropdown */
+
+.create-dropdown-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 11px 12px;
+
+  color: #334155;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.create-dropdown-menu button:hover {
+  color: #1d4ed8;
+  background: #eff4ff;
+}
+
+.create-dropdown-menu button:active {
+  background: #dfe9ff;
+}
+
+.create-dropdown-menu button:focus-visible {
+  outline: 2px solid #93b4ff;
+  outline-offset: -2px;
+  background: #eff4ff;
+}
+
+/* Optional icons inside menu items */
+
+.create-dropdown-menu button span,
+.create-dropdown-menu button svg {
+  flex-shrink: 0;
+}
+
+/* Optional separator */
+
+.create-dropdown-menu .dropdown-divider {
+  height: 1px;
+  margin: 5px 4px;
+  background: #edf0f5;
+  border: 0;
+}
+
+/* Popup animation */
+
+@keyframes gc-dropdown-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   DASHBOARD SECTIONS
+========================================= */
+
+.gc-section {
+  margin-bottom: 26px;
+}
+
+.gc-section-title {
+  margin: 0;
+  color: #243b5a;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.gc-section > .gc-section-title {
+  margin-bottom: 14px;
+}
+
+.gc-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.gc-date-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.gc-date-filter input {
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid #d8e0eb;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+}
+
+/* =========================================
+   STATISTICS CARDS
+========================================= */
+
+.gc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gc-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 104px;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.025);
+}
+
+.gc-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.gc-stat-icon.blue {
+  background: #e1eaff;
+  color: #3446a8;
+}
+
+.gc-stat-icon.green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.gc-stat-icon.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.gc-stat-icon.yellow {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+.gc-stat-icon.purple {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+.gc-stat-content p {
+  margin: 0 0 8px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.gc-stat-content h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 25px;
+  line-height: 1;
+}
+
+/* =========================================
+   DATA PANELS
+========================================= */
+
+.gc-data-panel {
+  margin-top: 20px;
+  margin-bottom: 22px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.025);
+}
+
+.gc-panel-heading {
+  margin-bottom: 18px;
+}
+
+.gc-panel-heading h3 {
+  margin: 0 0 6px;
+  color: #243b5a;
+  font-size: 18px;
+}
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+.gc-error-message,
+.gc-empty-message,
+.gc-info-message {
+  padding: 14px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.gc-error-message {
+  color: #b91c1c;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+.gc-empty-message {
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.gc-info-message {
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+/* =========================================
+   DATA TABLES
+========================================= */
+
+.gc-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.gc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.gc-table thead {
+  background: #f8fafc;
+}
+
+.gc-table th {
+  padding: 13px 14px;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.gc-table td {
+  padding: 14px;
+  color: #334155;
+  border-bottom: 1px solid #edf1f6;
+  font-size: 13px;
+}
+
+.gc-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.gc-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.gc-status-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  color: #334155;
+  background: #e2e8f0;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.gc-status-badge.active,
+.gc-status-badge.present,
+.gc-status-badge.approved {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.gc-status-badge.inactive,
+.gc-status-badge.absent,
+.gc-status-badge.rejected {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.gc-status-badge.half-day,
+.gc-status-badge.submitted,
+.gc-status-badge.pending {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.gc-status-badge.leave,
+.gc-status-badge.holiday,
+.gc-status-badge.week-off {
+  color: #6b21a8;
+  background: #f3e8ff;
+}
+
+/* =========================================
+   CREATE FORM PANEL
+========================================= */
+
+.gc-create-form-panel {
+  margin-bottom: 24px;
+}
+
+.gc-create-form-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gc-create-form-heading h3 {
+  margin: 0 0 6px;
+}
+
+.gc-create-form-heading p {
+  margin: 0;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+  .gc-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+  .gc-dashboard-main {
+    padding: 14px;
+  }
+
+  .gc-topbar h1 {
+    font-size: 18px;
+  }
+
+  .gc-page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .gc-header-actions {
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .gc-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .gc-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .gc-stat-card {
+    min-height: 88px;
+  }
+
+  .gc-data-panel {
+    padding: 15px;
+  }
+
+  .gc-create-form-heading {
+    align-items: flex-start;
+  }
+
+  .create-dropdown {
+    max-width: 100%;
+  }
+
+  .create-dropdown-button {
+    min-height: 40px;
+    padding: 0 13px;
+    font-size: 12px;
+  }
+
+  .create-dropdown-menu {
+    right: auto;
+    left: 0;
+    width: min(250px, calc(100vw - 28px));
+    min-width: 0;
+  }
+}
+
+
+/* =========================================
+   CREATE NEW DROPDOWN
+   Simple style - rest of dashboard unchanged
+========================================= */
+
+.create-menu {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
+}
+
+.create-menu-button {
+  padding: 8px 14px;
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #2563eb;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.create-menu-button:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.create-menu-button:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* Dropdown menu */
+.create-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  z-index: 1000;
+  min-width: 190px;
+  padding: 4px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Dropdown options */
+.create-menu-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  margin: 0;
+  background: transparent;
+  color: #334155;
+  border: none;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  line-height: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+.create-menu-dropdown button:hover {
+  background: #f1f5f9;
+  color: #1d4ed8;
+}
+
+.create-menu-dropdown button:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: -2px;
+}
+
+/* Small screens */
+@media (max-width: 650px) {
+  .create-menu-dropdown {
+    right: auto;
+    left: 0;
+    min-width: 190px;
+    max-width: calc(100vw - 30px);
+  }
+}
+
+
+
+/* Respect reduced-motion settings */
+
+@media (prefers-reduced-motion: reduce) {
+  .create-dropdown-menu {
+    animation: none;
+  }
+
+  .create-dropdown-button,
+  .create-dropdown-menu button {
+    transition: none;
+  }
+}

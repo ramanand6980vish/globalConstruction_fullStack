@@ -1,0 +1,5 @@
+package com.globalconstruction.portal.designation.entity;
+
+public class Designation {
+
+}

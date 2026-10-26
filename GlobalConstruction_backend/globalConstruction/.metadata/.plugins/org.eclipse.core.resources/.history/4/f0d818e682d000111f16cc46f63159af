@@ -1,0 +1,5 @@
+package com.globalconstruction.portal.department.repository;
+
+public class DepartmentRepository {
+
+}
